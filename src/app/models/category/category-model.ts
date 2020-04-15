@@ -1,9 +1,6 @@
-export class CategoryModel {
-    public id: number;
-    
-    public name: string;
-    
-    public parentCategory: CategoryModel;
-    
-    public childCategories: Array<CategoryModel>
+export interface ICategory {
+  id: number;
+  name: string;
+  parentCategory: ICategory;
+  childCategories: ICategory[];
 }
