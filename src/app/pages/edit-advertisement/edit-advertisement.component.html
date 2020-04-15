@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="mb-4">Редактировать объявление</h1>
+      <ng-container [formGroup]="form">
+        <div class="form-group">
+          <label for="title">Название</label>
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Введите название">
+        </div>
+        <div class="form-group">
+          <label for="body">Описание</label>
+          <textarea class="form-control" id="body" formControlName="body" placeholder="Введите описание"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="categoryId">Категория</label>
+          <select class="form-control custom-select" id="categoryId" formControlName="categoryId"
+                  *ngIf="categories$ | async as categories">
+            <option [value]="null">Выберите категорию</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2" [disabled]="form.invalid" (click)="submit()">Сохранить</button>
+        <a [routerLink]="['/',advertisementId$ | async]" class="btn btn-outline-secondary">Отмена</a>
+      </ng-container>
+    </div>
+  </div>
+</div>
