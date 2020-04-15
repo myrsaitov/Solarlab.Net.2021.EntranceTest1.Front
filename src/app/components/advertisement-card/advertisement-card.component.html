@@ -1,7 +1,9 @@
-<div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">{{advertisement.title}}</h5>
-      <p class="card-text">{{advertisement.body}}</p>
-      <a [routerLink]="['/advertisements', advertisement.id]" class="btn btn-primary">Перейти</a>
-    </div>
+<div class="card card-">
+  <div class="card-header">
+    <h4 class="card-title font-weight-bold">{{advertisement.title}}</h4>
+    <div class="badge badge-secondary" *ngIf="advertisement.categoryId">{{advertisement.category.name}}</div>
+  </div>
+  <div class="card-body">
+    <a routerLink="{{advertisement.id}}" class="btn btn-primary">Подробнее</a>
+  </div>
 </div>

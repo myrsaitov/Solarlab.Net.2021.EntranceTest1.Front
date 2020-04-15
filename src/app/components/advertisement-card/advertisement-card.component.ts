@@ -1,18 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IAdvertisementModel } from 'src/app/models/advertisement/advertisement-model';
+import {Component, Input} from '@angular/core';
+import {IAdvertisement} from '../../models/advertisement/i-advertisement';
 
 @Component({
   selector: 'app-advertisement-card',
   templateUrl: './advertisement-card.component.html',
   styleUrls: ['./advertisement-card.component.scss']
 })
-export class AdvertisementCardComponent implements OnInit {
 
-  @Input() advertisement: IAdvertisementModel;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class AdvertisementCardComponent {
+  @Input() advertisement: IAdvertisement;
 }

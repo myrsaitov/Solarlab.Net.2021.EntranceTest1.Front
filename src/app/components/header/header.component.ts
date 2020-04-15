@@ -1,4 +1,8 @@
+import {AuthService} from '../../services/auth.service';
 import {Component} from '@angular/core';
+import {BaseService} from 'src/app/services/base.service';
+import {ApiUrls} from 'src/app/shared/apiURLs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +11,23 @@ import {Component} from '@angular/core';
 })
 
 export class HeaderComponent {
+  isAuth$ = this.authService.isAuth$;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private readonly baseService: BaseService,
+    private readonly router: Router,
+  ) {
   }
+
+  logout() {
+    this.baseService.post(ApiUrls.logout)
+      .then(() => {
+        this.router.navigate(['/', 'login']);
+      })
+      .finally(() => {
+        this.authService.deleteSession();
+      });
+  }
+
 }
