@@ -11,7 +11,7 @@ import {IEditAdvertisement} from '../models/advertisement/advertisement-edit-mod
   providedIn: 'root'
 })
 export class AdvertisementService {
-  private ROOT_URL = `api/v1/advertisements`;
+  private ROOT_URL = `api/v1/abvertisement`;
 
   constructor(private http: HttpClient) {
   }

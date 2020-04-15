@@ -9,7 +9,7 @@ import {ICategoryFilter} from '../models/category/category-filter.model';
   providedIn: 'root'
 })
 export class CategoryService {
-  private ROOT_URL = `api/v1/categories`;
+  private ROOT_URL = `api/v1/category`;
 
   constructor(private http: HttpClient) {
   }
