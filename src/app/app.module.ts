@@ -22,6 +22,7 @@ import {AuthHeadersInterceptor} from './interceptors/headers.interceptor';
 import {CreateAdvertisementComponent} from './pages/create-advertisement/create-advertisement.component';
 import {ToastsContainerComponent} from './components/toast-container/toast-container.component';
 import {EditAdvertisementComponent} from './pages/edit-advertisement/edit-advertisement.component';
+import { ConnectionpageComponent } from './components/connectionpage/connectionpage.component';
 
 // export const createInterceptorProvider = (interceptor: any): Provider => {
 //   return {
@@ -43,7 +44,8 @@ import {EditAdvertisementComponent} from './pages/edit-advertisement/edit-advert
     AdvertisementComponent,
     CreateAdvertisementComponent,
     ToastsContainerComponent,
-    EditAdvertisementComponent
+    EditAdvertisementComponent,
+    ConnectionpageComponent
   ],
   imports: [
     BrowserModule,

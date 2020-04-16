@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
     const payload: ILogin = this.loginForm.getRawValue();
     await this.baseService.post(ApiUrls.login, payload)
       .then(res => {
-        
         if (res) {
           this.auth.saveSession(res);
           this.router.navigate(['/']);

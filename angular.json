@@ -124,10 +124,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "dashboard2020-spa",
-  "cli": {
-    "analytics": false
-  }
+    }},
+  "defaultProject": "dashboard2020-spa"
 }
