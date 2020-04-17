@@ -18,8 +18,8 @@ export class BaseService {
       () => {console.log("3. The POST observable is now completed.");});
 */
 
-
-
+//user2@test.ru 12@324fDF4_
+//(click)="register()"
     return this.http.post(apiURL, payload, {responseType: 'text'}).toPromise();
   }
 }

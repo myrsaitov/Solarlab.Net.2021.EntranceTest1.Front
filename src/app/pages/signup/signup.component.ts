@@ -48,6 +48,9 @@ export class SignupComponent implements OnInit {
   }
 
   register() {
+    console.log("Called register()");
+    // Old version 2 time called
+    //<form class="form-login" [formGroup]="form" (ngSubmit)="register()">
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
