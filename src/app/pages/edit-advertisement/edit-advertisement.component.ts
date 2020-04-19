@@ -41,6 +41,7 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
     this.advertisementId$.pipe(switchMap(advertisementId => {
       return this.advertisementService.getAdvertisementById(advertisementId);
     }), takeUntil(this.destroy$)).subscribe(advertisement => {
+      //Вписать значения в форму
       this.title.patchValue(advertisement.title);
       this.body.patchValue(advertisement.body);
       this.categoryId.patchValue(advertisement.categoryId);

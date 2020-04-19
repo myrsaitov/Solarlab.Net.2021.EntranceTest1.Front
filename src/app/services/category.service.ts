@@ -23,11 +23,29 @@ export class CategoryService {
     const params = new HttpParams()
       .set('page', `${page}`)
       .set('pageSize', `${pageSize}`);
-
+      
+      //debugger;
     return this.http.get<ICategory[]>(`${this.ROOT_URL}/list`, {params})
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;
       }));
   }
+
+
+
+  getCategoryById(id: number) {
+
+    return this.http.get<ICategory>(`${this.ROOT_URL}/${id}`)
+      .pipe(catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      }));
+      
+  }
+
+
+
+
+
 }

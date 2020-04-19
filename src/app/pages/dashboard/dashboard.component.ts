@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
     this.categories$ = this.categoryFilterChange$.pipe(
       switchMap(categoryFilter => this.categoryService.getCategoryList(categoryFilter))
     );
+    //debugger;
   }
 
   get advertisementsFilter() {

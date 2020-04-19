@@ -8,6 +8,9 @@ import {AuthService} from '../../services/auth.service';
 import {ToastService} from '../../services/toast.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+import {CategoryService} from '../../services/category.service';//
+import {ICategory} from '../../models/category/category-model';//
+
 @Component({
   templateUrl: './advertisement.component.html',
   styleUrls: ['./advertisement.component.scss'],
@@ -15,6 +18,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
+  category: ICategory;//
   isAuth = this.authService.isAuth;
 
   constructor(private route: ActivatedRoute,
@@ -22,12 +26,15 @@ export class AdvertisementComponent implements OnInit {
               private advertisementService: AdvertisementService,
               private authService: AuthService,
               private toastService: ToastService,
+              private categoryService: CategoryService,//
               private modalService: NgbModal) {
   }
 
   ngOnInit() {
+
+
     this.route.params.pipe(pluck('id')).subscribe(advertisementId => {
-      //debugger;
+
       this.advertisementService.getAdvertisementById(advertisementId).subscribe(advertisement => {
         //debugger;
         if (isNullOrUndefined(advertisement)) {
@@ -35,9 +42,32 @@ export class AdvertisementComponent implements OnInit {
           this.router.navigate(['/']);
           return;
         }
+
         this.advertisement = advertisement;
       });
     });
+
+  
+
+
+    this.route.params.pipe(pluck('id')).subscribe(CategoryId => {
+
+      this.categoryService.getCategoryById(CategoryId).subscribe(category => {
+        //debugger;
+        if (isNullOrUndefined(category)) {
+          //debugger;
+          this.router.navigate(['/']);
+          return;
+        }
+
+        this.category = category;
+      });
+    });
+
+    
+
+    debugger;
+
   }
 
   delete(id: number) {
