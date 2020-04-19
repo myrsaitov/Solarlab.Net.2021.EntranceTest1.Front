@@ -3,12 +3,14 @@ import {TagModel} from '../tag/tag-model';
 export interface ICreateAdvertisement {
   title: string;
   body: string;
+  email: string;
   categoryId: number;
   tags: TagModel[];
 }
 
 export class CreateAdvertisement implements ICreateAdvertisement {
   body: string;
+  email: string;
   categoryId: number;
   tags: TagModel[];
   title: string;
@@ -19,6 +21,7 @@ export class CreateAdvertisement implements ICreateAdvertisement {
       categoryId: null,
       tags: [],
       title: '',
+      email: '',
       ...data
     };
 
@@ -26,5 +29,6 @@ export class CreateAdvertisement implements ICreateAdvertisement {
     this.categoryId = defaults.categoryId;
     this.tags = defaults.tags;
     this.title = defaults.title;
+    this.email = defaults.email;
   }
 }

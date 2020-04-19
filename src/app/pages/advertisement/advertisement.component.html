@@ -4,10 +4,12 @@
       <div>
         <h1 class="h3">{{advertisement.title}}</h1>
         <div class="badge badge-secondary" *ngIf="advertisement.category?.name">{{advertisement.category?.name}}</div>
+        <h4>  Добавлено пользователем:
+        <div class="badge badge-secondary" *ngIf="advertisement?.email">{{advertisement.email}}</div></h4>
       </div>
       <div class="align-self-center ml-auto" *ngIf="isAuth">
-        <a class="btn btn-outline-secondary mr-2" [routerLink]="['/edit', advertisement.id]">Редактировать</a>
-        <button class="btn btn-outline-danger" (click)="openDeleteModal(content)">Удалить</button>
+        <a class="btn btn-outline-secondary mr-2" [routerLink]="['/edit', advertisement.id]" *ngIf="isEditable">Редактировать</a>
+        <button *ngIf="isEditable" class="btn btn-outline-danger" (click)="openDeleteModal(content)">Удалить</button>
       </div>
 
     </div>

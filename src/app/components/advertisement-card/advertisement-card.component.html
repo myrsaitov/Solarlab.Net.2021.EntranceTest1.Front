@@ -2,6 +2,8 @@
   <div class="card-header">
     <h4 class="card-title font-weight-bold">{{advertisement.title}}</h4>
     <div class="badge badge-secondary" *ngIf="advertisement.categoryId">{{advertisement.category.name}}</div>
+    <h6>  Добавлено пользователем:
+      <div class="badge badge-secondary" *ngIf="advertisement?.email">{{advertisement.email}}</div></h6>
   </div>
   <div class="card-body">
     <a routerLink="{{advertisement.id}}" class="btn btn-primary">Подробнее</a>

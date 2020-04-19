@@ -57,6 +57,7 @@ export class CreateAdvertisementComponent implements OnInit {
     const model: Partial<ICreateAdvertisement> = {
       title: this.title.value,
       body: this.body.value,
+      email: sessionStorage.getItem('currentUser'),
       categoryId: +this.categoryId.value
     };
 

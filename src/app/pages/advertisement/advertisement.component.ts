@@ -19,8 +19,8 @@ import {ICategory} from '../../models/category/category-model';//
 export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
   isAuth = this.authService.isAuth;
+  isEditable: boolean;
 
-  
   constructor(private route: ActivatedRoute,
               private router: Router,
               private advertisementService: AdvertisementService,
@@ -44,6 +44,19 @@ export class AdvertisementComponent implements OnInit {
         }
 
         this.advertisement = advertisement;
+        console.log("Get title from API");
+        console.log(this.advertisement.title);
+
+        console.log("Get email from API");
+        console.log(this.advertisement.email);
+
+        // Запрет редактировать чужое объявление
+        if(this.advertisement.email == sessionStorage.getItem('currentUser'))
+        {this.isEditable = true;}
+          else
+          {this.isEditable = false;}
+          console.log("this.isEditable");
+          console.log(this.isEditable);
 
 
           this.categoryService.getCategoryById(this.advertisement.categoryId).subscribe(category => {
