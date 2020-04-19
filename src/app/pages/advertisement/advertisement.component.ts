@@ -27,10 +27,11 @@ export class AdvertisementComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.pipe(pluck('id')).subscribe(advertisementId => {
-      debugger;
+      //debugger;
       this.advertisementService.getAdvertisementById(advertisementId).subscribe(advertisement => {
-        debugger;
+        //debugger;
         if (isNullOrUndefined(advertisement)) {
+          //debugger;
           this.router.navigate(['/']);
           return;
         }

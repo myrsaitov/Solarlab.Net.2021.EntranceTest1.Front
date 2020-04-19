@@ -47,12 +47,31 @@ export class LoginComponent implements OnInit {
       return;
     }
     const payload: ILogin = this.loginForm.getRawValue();
+
+
     await this.baseService.post(ApiUrls.login, payload)
       .then(res => {
         if (res) {
           this.auth.saveSession(res);
           this.router.navigate(['/']);
         }
+        else
+        {this.router.navigate(['/login_error']);}
       });
+
+
+
+/*
+    this.http.post(apiURL, payload, {responseType: 'text'})
+      .subscribe(
+      (val) => {console.log("1. POST call successful value returned in body",val);},
+      response => {console.log("2. POST call in error", response);},
+      () => {console.log("3. The POST observable is now completed.");});
+*/
+
+
+
+
+      
   }
 }

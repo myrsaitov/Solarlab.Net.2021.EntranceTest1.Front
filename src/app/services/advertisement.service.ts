@@ -34,11 +34,13 @@ export class AdvertisementService {
   }
 
   getAdvertisementById(id: number) {
+
     return this.http.get<IAdvertisement>(`${this.ROOT_URL}/${id}`)
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;
       }));
+      
   }
 
   create(model: ICreateAdvertisement) {
