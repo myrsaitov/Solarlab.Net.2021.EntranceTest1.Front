@@ -35,7 +35,7 @@ export class CreateAdvertisementComponent implements OnInit {
       pageSize: 1000,
       page: 1,
     });
-    debugger;
+    //debugger;
   }
 
   get title() {

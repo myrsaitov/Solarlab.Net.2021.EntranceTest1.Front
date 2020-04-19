@@ -18,7 +18,6 @@ import {ICategory} from '../../models/category/category-model';//
 
 export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
-  category: ICategory;//
   isAuth = this.authService.isAuth;
 
   constructor(private route: ActivatedRoute,
@@ -44,29 +43,23 @@ export class AdvertisementComponent implements OnInit {
         }
 
         this.advertisement = advertisement;
+
+
+          this.categoryService.getCategoryById(this.advertisement.categoryId).subscribe(category => {
+          if (isNullOrUndefined(category)) {
+            this.router.navigate(['/']);
+            return;
+          }
+
+          this.advertisement.category = category;
+
+          });
+
       });
     });
 
   
-// By MKM
 
-    this.route.params.pipe(pluck('id')).subscribe(CategoryId => {
-
-      this.categoryService.getCategoryById(CategoryId).subscribe(category => {
-        //debugger;
-        if (isNullOrUndefined(category)) {
-          //debugger;
-          this.router.navigate(['/']);
-          return;
-        }
-
-        this.category = category;
-      });
-    });
-
-    
-
-    //debugger;
 
   }
 
