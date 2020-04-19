@@ -29,6 +29,12 @@ export class AuthService {
     this.isAuthSubject$.next(!!this.getSession());
   }
 
+  getUsername() {
+
+    return sessionStorage.getItem('currentUser');
+
+  }
+
   isAuthenticated(): Promise<boolean> {
     return new Promise((resolve) => {
       resolve(!!this.getSession());

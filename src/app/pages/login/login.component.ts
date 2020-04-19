@@ -49,18 +49,22 @@ export class LoginComponent implements OnInit {
     const payload: ILogin = this.loginForm.getRawValue();
 
 
+    //Сохраняем имя залогиненного пользователя
+    sessionStorage.setItem('currentUser', payload.email);
+    console.log(sessionStorage.getItem('currentUser'));
+    //debugger;
+   
+   
     await this.baseService.post(ApiUrls.login, payload)
       .then(res => {
         if (res) {
           this.auth.saveSession(res);
           this.router.navigate(['/']);
         }
-        else
-        {this.router.navigate(['/login_error']);}
       });
 
-
-
+      //this.auth.getUsername();
+}
 /*
     this.http.post(apiURL, payload, {responseType: 'text'})
       .subscribe(
@@ -73,5 +77,5 @@ export class LoginComponent implements OnInit {
 
 
       
-  }
+  
 }

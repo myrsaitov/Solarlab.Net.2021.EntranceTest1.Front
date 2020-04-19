@@ -15,12 +15,15 @@
            [routerLinkActiveOptions]="{exact: true}"
            routerLink="/signup">Регистрация</a>
       </li>
+      
     </ng-container>
     <ng-template #noAuthenticated>
       <li class="nav-item">
         <button class="btn btn-outline-primary"
                 (click)="logout()">Выход
         </button>
+        <h4>Вы вошли под именем: 
+          <span class="badge badge-secondary">{{userName()}}</span></h4>
       </li>
     </ng-template>
   </ul>

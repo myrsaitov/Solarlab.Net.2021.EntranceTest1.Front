@@ -20,6 +20,7 @@ export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
   isAuth = this.authService.isAuth;
 
+  
   constructor(private route: ActivatedRoute,
               private router: Router,
               private advertisementService: AdvertisementService,

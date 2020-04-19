@@ -13,12 +13,21 @@ import {Router} from '@angular/router';
 export class HeaderComponent {
   isAuth$ = this.authService.isAuth$;
 
+
   constructor(
     private authService: AuthService,
     private readonly baseService: BaseService,
     private readonly router: Router,
   ) {
   }
+
+
+  userName(){
+
+    return this.authService.getUsername();
+
+  }
+
 
   logout() {
     this.baseService.post(ApiUrls.logout)
