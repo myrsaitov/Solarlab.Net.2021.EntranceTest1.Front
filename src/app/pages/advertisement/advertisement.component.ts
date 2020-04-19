@@ -48,7 +48,7 @@ export class AdvertisementComponent implements OnInit {
     });
 
   
-
+// By MKM
 
     this.route.params.pipe(pluck('id')).subscribe(CategoryId => {
 
@@ -66,7 +66,7 @@ export class AdvertisementComponent implements OnInit {
 
     
 
-    debugger;
+    //debugger;
 
   }
 
