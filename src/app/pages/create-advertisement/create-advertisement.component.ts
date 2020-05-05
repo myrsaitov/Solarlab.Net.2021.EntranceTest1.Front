@@ -8,6 +8,7 @@ import {ToastService} from '../../services/toast.service';
 import {CategoryService} from '../../services/category.service';
 import {Observable} from 'rxjs';
 import {ICategory} from '../../models/category/category-model';
+import { TagModel } from 'src/app/models/tag/tag-model';
 
 @Component({
   selector: 'app-create-advertisement',
@@ -17,6 +18,7 @@ import {ICategory} from '../../models/category/category-model';
 export class CreateAdvertisementComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<ICategory[]>;
+  _tags: TagModel[]; ///MKM
 
   constructor(private fb: FormBuilder,
               private advertisementService: AdvertisementService,
@@ -29,6 +31,7 @@ export class CreateAdvertisementComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required],
+      tags: ['', Validators.required],
       categoryId: [null, Validators.required]
     });
     this.categories$ = this.categoryService.getCategoryList({
@@ -50,13 +53,56 @@ export class CreateAdvertisementComponent implements OnInit {
     return this.form.get('categoryId');
   }
 
+  get tags() {
+    return this.form.get('tags');
+  }
+
   submit() {
     if (this.form.invalid) {
       return;
     }
+
+
+// Взяли строку с тагами с формы
+var TagStr = this.tags.value;
+
+// Разбираем эту строку в массив
+var arrayOfStrings = TagStr.split(',');
+
+let loopid = 0;
+arrayOfStrings.forEach(function (value) 
+{
+    const tagmodel_loop: TagModel = {
+      id: loopid,
+      tagText: value  
+    }
+    
+  if(loopid++ == 0)
+  {
+    // Самый первый элемент массива, а потом работаем пушами
+    this._tags = [tagmodel_loop];
+  }
+  else
+  {
+    this._tags.push(tagmodel_loop);
+  }
+
+},this); 
+// },this); т.к. this не виден внутри этого цикла !
+//https://stackoverflow.com/questions/15013016/variable-is-not-accessible-in-angular-foreach
+
+
+
+
+
+
+    //this.tags.push(tagmodel);
+    //console.log(this._tags.id);
+
     const model: Partial<ICreateAdvertisement> = {
       title: this.title.value,
       body: this.body.value,
+      tags: this._tags,
       email: sessionStorage.getItem('currentUser'),
       categoryId: +this.categoryId.value
     };
@@ -67,3 +113,30 @@ export class CreateAdvertisementComponent implements OnInit {
     });
   }
 }
+
+// Как сейчас выглядит отправка в UI
+/*
+ {
+  body: "jh56rj65e",
+  categoryId: 2,
+  tags: Array(0),
+  title: "y56yh56t",
+  email: "user@test.ru"
+}
+*/
+
+// Как выглядит в сваггере
+/*
+{
+  body:"Продам квадрацикл",
+  categoryId:1,
+  tags:[{id:0,tagText:"квадроцикл"}]
+  title:"Продам",
+  email:"user@test.ru",
+  deleted:true,
+}
+*/
+
+/*
+{\"title\":\"string\",\"body\":\"string\",\"email\":\"string\",\"deleted\":true,\"categoryId\":1,\"tags\":[{\"id\":0,\"tagText\":\"string\"}]}"
+*/
