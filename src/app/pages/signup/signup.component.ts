@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../services/account.service';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {confirmPasswordValidator} from '../../directives/confirm-password-validator.directive';
+import {Router} from '@angular/router';
+import {AuthService} from 'src/app/services/auth.service';
+import {ApiUrls} from 'src/app/shared/apiURLs';
+import {ILogin} from 'src/app/models/account/login.model';
+import {BaseService} from 'src/app/services/base.service';
+import {EMPTY} from 'rxjs';
+import { error } from 'util';
 
 @Component({
   selector: 'app-signup',
@@ -11,8 +18,14 @@ import {confirmPasswordValidator} from '../../directives/confirm-password-valida
 
 export class SignupComponent implements OnInit {
   form: FormGroup;
+  notregisterstatus = false;
 
-  constructor(private fb: FormBuilder, private accountService: AccountService) {
+  constructor(
+    private fb: FormBuilder, 
+    private accountService: AccountService,
+    private readonly auth: AuthService,
+    private readonly baseService: BaseService,
+    private readonly router: Router) {
   }
 
   ngOnInit() {
@@ -47,14 +60,59 @@ export class SignupComponent implements OnInit {
     return this.form.get('confirmPassword');
   }
 
-  register() {
+
+
+  public async register() {
+
     console.log("Called register()");
-    // Old version 2 time called
-    //<form class="form-login" [formGroup]="form" (ngSubmit)="register()">
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    this.accountService.register(this.form.value).subscribe(res => console.log(res));
+
+    console.log("REGISTER");
+
+
+
+ var RES = await this.accountService.register(this.form.value)
+   .toPromise();
+
+   
+
+    //LOGIN
+  if(RES)
+  {
+      console.log("REGISTER Success");
+      this.form.markAllAsTouched();
+      if (this.form.invalid) 
+      {  
+        return;
+      }
+    
+      const payload: ILogin = this.form.getRawValue();
+
+      sessionStorage.setItem('currentUser', payload.email);
+      console.log(sessionStorage.getItem('currentUser'));
+
+      console.log("LOGIN");
+      await this.baseService.post(ApiUrls.login, payload)
+        .then(res => {
+          if (res) 
+          {
+            this.auth.saveSession(res);
+            this.router.navigate(['/']);
+          }
+        });
   }
+  else
+  {
+    //Ошибка региистрации
+    console.log("REGISTER Error");
+    this.notregisterstatus = true;
+  }
+
+}
+
+
+  
 }

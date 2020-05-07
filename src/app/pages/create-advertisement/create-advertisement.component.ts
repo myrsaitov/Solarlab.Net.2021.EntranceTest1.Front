@@ -31,7 +31,7 @@ export class CreateAdvertisementComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required],
-      tags: ['', Validators.required],
+      tags: [null],
       categoryId: [null, Validators.required]
     });
     this.categories$ = this.categoryService.getCategoryList({
@@ -66,38 +66,50 @@ export class CreateAdvertisementComponent implements OnInit {
 // Взяли строку с тагами с формы
 var TagStr = this.tags.value;
 
-// Разбираем эту строку в массив
-var arrayOfStrings = TagStr.split(',');
-
-let loopid = 0;
-arrayOfStrings.forEach(function (value) 
+if(TagStr.length > 0)
 {
-    const tagmodel_loop: TagModel = {
-      id: loopid,
-      tagText: value  
+
+  console.log("TAG string:");
+  console.log(TagStr);
+
+  //Убрали все лишние символы, кроме букв и цифр
+  //https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
+  //https://www.exlab.net/files/tools/sheets/regexp/regexp.pdf
+  var TagStr_ = TagStr.replace(/[~!@"'#$%^:;&?*()+=\s]/g, ' ');
+
+  console.log("TAG string with removed non-car symbols:");
+  console.log(TagStr_);
+
+  // Разбираем эту строку в массив
+  //https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
+  var arrayOfStrings = TagStr_.split(/[\s,]+/);
+  console.log("Splitted TAG string:");
+  console.log(arrayOfStrings);
+  let loopid = 0;
+
+  arrayOfStrings.forEach(function (value) 
+  {
+    if((value.length>0)&&(value.length<31)) // Убираем "нулевые строки"
+    {
+      const tagmodel_loop: TagModel = {
+        id: loopid,
+        tagText: value  
+      }
+   
+      if(loopid++ == 0)
+      {
+        // Самый первый элемент массива, а потом работаем пушами
+        this._tags = [tagmodel_loop];
+      }
+      else
+      {
+        this._tags.push(tagmodel_loop);
+      }
     }
-    
-  if(loopid++ == 0)
-  {
-    // Самый первый элемент массива, а потом работаем пушами
-    this._tags = [tagmodel_loop];
-  }
-  else
-  {
-    this._tags.push(tagmodel_loop);
-  }
-
-},this); 
-// },this); т.к. this не виден внутри этого цикла !
-//https://stackoverflow.com/questions/15013016/variable-is-not-accessible-in-angular-foreach
-
-
-
-
-
-
-    //this.tags.push(tagmodel);
-    //console.log(this._tags.id);
+  },this); 
+  // },this); т.к. this не виден внутри этого цикла !
+  //https://stackoverflow.com/questions/15013016/variable-is-not-accessible-in-angular-foreach
+}
 
     const model: Partial<ICreateAdvertisement> = {
       title: this.title.value,

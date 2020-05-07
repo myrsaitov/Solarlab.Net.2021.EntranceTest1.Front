@@ -1,6 +1,17 @@
 <form class="form-login" [formGroup]="form" >
+
+  <style>
+    .colortext {
+      color: red; /* Красный цвет выделения */
+    }
+   </style>
+
   <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
   <div class="form-group">
+    <div *ngIf="notregisterstatus">
+      <p><span class="colortext">Ошибка регистрации! Введите другой e-mail!</span></p>
+    </div>
+
     <label for="inputEmail">Email</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email" autofocus
            [class.is-invalid]="email.invalid && email.touched" formControlName="email">
@@ -60,6 +71,6 @@
       Пароль не совпадает
     </div>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="register()">Регистрация</button>
+  <button class="btn btn-lg btn-primary btn-block" (click)="register()">Регистрация</button>
 </form>
 
