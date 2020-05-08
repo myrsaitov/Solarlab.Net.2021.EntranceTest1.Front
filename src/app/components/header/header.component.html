@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark mb-4 d-flex">
   <a class="navbar-brand"
      routerLink="/">Доска объявлений</a>
+
+     <div [innerHTML]="div_tag_div_str"></div>
   <ul class="nav nav-pills ml-auto">
     <ng-container *ngIf="!(isAuth$ | async); else noAuthenticated">
       <li class="nav-item">

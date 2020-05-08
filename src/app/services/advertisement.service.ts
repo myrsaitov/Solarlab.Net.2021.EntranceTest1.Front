@@ -43,6 +43,16 @@ export class AdvertisementService {
       
   }
 
+  getAdvertisementGetAllTags() {
+
+    return this.http.get<IAdvertisement>(`${this.ROOT_URL}/GetAllTags`)
+      .pipe(catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      }));
+      
+  }
+
   create(model: ICreateAdvertisement) {
     return this.http.post(`${this.ROOT_URL}`, model)
       .pipe(catchError((err) => {
