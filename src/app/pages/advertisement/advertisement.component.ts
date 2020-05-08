@@ -29,6 +29,7 @@ export class AdvertisementComponent implements OnInit {
   tagstr_7: string;
   tagstr_8: string;
   tagstr_9: string;
+  div_tag_div_str: string;
   isAuth = this.authService.isAuth;
   isEditable: boolean;
 
@@ -41,7 +42,12 @@ export class AdvertisementComponent implements OnInit {
               private modalService: NgbModal) {
   }
 
+
+
+
   ngOnInit() {
+
+
 
 
     this.route.params.pipe(pluck('id')).subscribe(advertisementId => {
@@ -53,24 +59,19 @@ export class AdvertisementComponent implements OnInit {
           this.router.navigate(['/']);
           return;
         }
-var tagindex = 0;
+
+      this.div_tag_div_str = '';
 
         advertisement.tags.forEach(function (value) 
         {
           
-          if(tagindex == 0){this.tagstr_0 = value.tagText;}
-          if(tagindex == 1){this.tagstr_1 = value.tagText;}
-          if(tagindex == 2){this.tagstr_2 = value.tagText;}
-          if(tagindex == 3){this.tagstr_3 = value.tagText;}
-          if(tagindex == 4){this.tagstr_4 = value.tagText;}
-          if(tagindex == 5){this.tagstr_5 = value.tagText;}
-          if(tagindex == 6){this.tagstr_6 = value.tagText;}
-          if(tagindex == 7){this.tagstr_7 = value.tagText;}
-          if(tagindex == 8){this.tagstr_8 = value.tagText;}
-          if(tagindex == 9){this.tagstr_9 = value.tagText;}
+          this.div_tag_div_str += "<div class=\"badge badge-secondary\">" ;
+          this.div_tag_div_str += value.tagText;
+          this.div_tag_div_str += "</div>&nbsp;&nbsp;";
 
-          tagindex++;
         },this);
+
+
 
 
         this.advertisement = advertisement;
@@ -118,3 +119,5 @@ var tagindex = 0;
     this.modalService.open(content, {centered: true});
   }
 }
+
+
