@@ -8,6 +8,7 @@ import {CategoryService} from '../../services/category.service';
 import {Observable, Subject} from 'rxjs';
 import {ICategory} from '../../models/category/category-model';
 import {EditAdvertisement, IEditAdvertisement} from '../../models/advertisement/advertisement-edit-model';
+import { TagModel } from 'src/app/models/tag/tag-model';
 
 @Component({
   selector: 'app-edit-advertisement',
@@ -19,16 +20,9 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
   categories$: Observable<ICategory[]>;
   advertisementId$ = this.route.params.pipe(pluck('id'));
   destroy$ = new Subject();
-  tagstr_0: string;
-  tagstr_1: string;
-  tagstr_2: string;
-  tagstr_3: string;
-  tagstr_4: string;
-  tagstr_5: string;
-  tagstr_6: string;
-  tagstr_7: string;
-  tagstr_8: string;
-  tagstr_9: string;
+  tagstr: string;
+  _tags: TagModel[];
+
 
   constructor(private fb: FormBuilder,
               private advertisementService: AdvertisementService,
@@ -57,37 +51,15 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
       this.body.patchValue(advertisement.body);
       this.categoryId.patchValue(advertisement.categoryId);
 
-      var tagindex = 0;
-
-      this.tagstr_0 = "";
-      this.tagstr_1 = "";
-      this.tagstr_2 = "";
-      this.tagstr_3 = "";
-      this.tagstr_4 = "";
-      this.tagstr_5 = "";
-      this.tagstr_6 = "";
-      this.tagstr_7 = "";
-      this.tagstr_8 = "";
-      this.tagstr_9 = "";
-
+      this.tagstr = "";
       advertisement.tags.forEach(function (value) 
       {
         
-        if(tagindex == 0){this.tagstr_0 = value.tagText;}
-        if(tagindex == 1){this.tagstr_1 = value.tagText;}
-        if(tagindex == 2){this.tagstr_2 = value.tagText;}
-        if(tagindex == 3){this.tagstr_3 = value.tagText;}
-        if(tagindex == 4){this.tagstr_4 = value.tagText;}
-        if(tagindex == 5){this.tagstr_5 = value.tagText;}
-        if(tagindex == 6){this.tagstr_6 = value.tagText;}
-        if(tagindex == 7){this.tagstr_7 = value.tagText;}
-        if(tagindex == 8){this.tagstr_8 = value.tagText;}
-        if(tagindex == 9){this.tagstr_9 = value.tagText;}
+        this.tagstr +=' ' + value.tagText;
 
-        tagindex++;
       },this);
 
-      this.tags.patchValue(this.tagstr_0+' '+this.tagstr_1+' '+this.tagstr_2+' '+this.tagstr_3+' '+this.tagstr_4+' '+this.tagstr_5+' '+this.tagstr_6+' '+this.tagstr_7+' '+this.tagstr_8+' '+this.tagstr_9);
+      this.tags.patchValue(this.tagstr);
 
 
     });
@@ -118,11 +90,74 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+
+
+// Взяли строку с тагами с формы
+var TagStr = this.tags.value;
+
+if(TagStr != null)
+{
+
+  console.log("TAG string:");
+  console.log(TagStr);
+
+  //Убрали все лишние символы, кроме букв и цифр
+  //https://stackoverflow.com/questions/1862130/strip-all-non-numeric-characters-from-string-in-javascript
+  //https://www.exlab.net/files/tools/sheets/regexp/regexp.pdf
+  var TagStr_ = TagStr.replace(/[~!@"'#$%^:;&?*()+=\s]/g, ' ');
+
+  console.log("TAG string with removed non-car symbols:");
+  console.log(TagStr_);
+
+  // Разбираем эту строку в массив
+  //https://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
+  var arrayOfStrings = TagStr_.split(/[\s,]+/);
+  console.log("Splitted TAG string:");
+  console.log(arrayOfStrings);
+  let loopid = 0;
+
+  arrayOfStrings.forEach(function (value) 
+  {
+    if((value.length>0)&&(value.length<31)) // Убираем "нулевые строки"
+    {
+      const tagmodel_loop: TagModel = {
+        id: loopid,
+        tagText: value  
+      }
+   
+      if(loopid++ == 0)
+      {
+        // Самый первый элемент массива, а потом работаем пушами
+        this._tags = [tagmodel_loop];
+      }
+      else
+      {
+        this._tags.push(tagmodel_loop);
+      }
+    }
+  },this); 
+  // },this); т.к. this не виден внутри этого цикла !
+  //https://stackoverflow.com/questions/15013016/variable-is-not-accessible-in-angular-foreach
+}
+
+
+
+
+
+
+
+
+
+
+
+
     this.advertisementId$.pipe(switchMap(id => {
       const model: Partial<IEditAdvertisement> = {
         id: +id,
         title: this.title.value,
         body: this.body.value,
+        tags: this._tags,
+        email: sessionStorage.getItem('currentUser'),
         categoryId: +this.categoryId.value
       };
 
