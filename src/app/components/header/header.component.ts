@@ -13,7 +13,7 @@ import {isNullOrUndefined} from 'util';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-
+// ntcn
 export class HeaderComponent {
   isAuth$ = this.authService.isAuth$;
   div_tag_div_str: string;
