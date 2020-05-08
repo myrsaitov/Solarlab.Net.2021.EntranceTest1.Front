@@ -66,7 +66,7 @@ export class CreateAdvertisementComponent implements OnInit {
 // Взяли строку с тагами с формы
 var TagStr = this.tags.value;
 
-if(TagStr.length > 0)
+if(TagStr != null)
 {
 
   console.log("TAG string:");

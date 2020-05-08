@@ -13,6 +13,7 @@ import {AuthService} from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  notloginedstatus = false;
 
   private formObj = {
     email: [null, [Validators.required, Validators.email]],
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
           this.auth.saveSession(res);
           this.router.navigate(['/']);
         }
+          else{this.notloginedstatus = true;}
       });
 
       //this.auth.getUsername();

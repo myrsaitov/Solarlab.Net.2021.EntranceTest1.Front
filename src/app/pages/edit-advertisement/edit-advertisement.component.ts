@@ -19,6 +19,16 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
   categories$: Observable<ICategory[]>;
   advertisementId$ = this.route.params.pipe(pluck('id'));
   destroy$ = new Subject();
+  tagstr_0: string;
+  tagstr_1: string;
+  tagstr_2: string;
+  tagstr_3: string;
+  tagstr_4: string;
+  tagstr_5: string;
+  tagstr_6: string;
+  tagstr_7: string;
+  tagstr_8: string;
+  tagstr_9: string;
 
   constructor(private fb: FormBuilder,
               private advertisementService: AdvertisementService,
@@ -36,6 +46,7 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required],
+      tags: ['',Validators.required],
       categoryId: ['', Validators.required]
     });
     this.advertisementId$.pipe(switchMap(advertisementId => {
@@ -45,6 +56,40 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
       this.title.patchValue(advertisement.title);
       this.body.patchValue(advertisement.body);
       this.categoryId.patchValue(advertisement.categoryId);
+
+      var tagindex = 0;
+
+      this.tagstr_0 = "";
+      this.tagstr_1 = "";
+      this.tagstr_2 = "";
+      this.tagstr_3 = "";
+      this.tagstr_4 = "";
+      this.tagstr_5 = "";
+      this.tagstr_6 = "";
+      this.tagstr_7 = "";
+      this.tagstr_8 = "";
+      this.tagstr_9 = "";
+
+      advertisement.tags.forEach(function (value) 
+      {
+        
+        if(tagindex == 0){this.tagstr_0 = value.tagText;}
+        if(tagindex == 1){this.tagstr_1 = value.tagText;}
+        if(tagindex == 2){this.tagstr_2 = value.tagText;}
+        if(tagindex == 3){this.tagstr_3 = value.tagText;}
+        if(tagindex == 4){this.tagstr_4 = value.tagText;}
+        if(tagindex == 5){this.tagstr_5 = value.tagText;}
+        if(tagindex == 6){this.tagstr_6 = value.tagText;}
+        if(tagindex == 7){this.tagstr_7 = value.tagText;}
+        if(tagindex == 8){this.tagstr_8 = value.tagText;}
+        if(tagindex == 9){this.tagstr_9 = value.tagText;}
+
+        tagindex++;
+      },this);
+
+      this.tags.patchValue(this.tagstr_0+' '+this.tagstr_1+' '+this.tagstr_2+' '+this.tagstr_3+' '+this.tagstr_4+' '+this.tagstr_5+' '+this.tagstr_6+' '+this.tagstr_7+' '+this.tagstr_8+' '+this.tagstr_9);
+
+
     });
   }
 
@@ -63,6 +108,10 @@ export class EditAdvertisementComponent implements OnInit, OnDestroy {
 
   get categoryId() {
     return this.form.get('categoryId');
+  }
+
+  get tags() {
+    return this.form.get('tags');
   }
 
   submit() {

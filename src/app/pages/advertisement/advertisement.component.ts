@@ -10,6 +10,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {CategoryService} from '../../services/category.service';//
 import {ICategory} from '../../models/category/category-model';//
+import { TagModel } from 'src/app/models/tag/tag-model';
 
 @Component({
   templateUrl: './advertisement.component.html',
@@ -18,6 +19,16 @@ import {ICategory} from '../../models/category/category-model';//
 
 export class AdvertisementComponent implements OnInit {
   advertisement: IAdvertisement;
+  tagstr_0: string;
+  tagstr_1: string;
+  tagstr_2: string;
+  tagstr_3: string;
+  tagstr_4: string;
+  tagstr_5: string;
+  tagstr_6: string;
+  tagstr_7: string;
+  tagstr_8: string;
+  tagstr_9: string;
   isAuth = this.authService.isAuth;
   isEditable: boolean;
 
@@ -42,6 +53,25 @@ export class AdvertisementComponent implements OnInit {
           this.router.navigate(['/']);
           return;
         }
+var tagindex = 0;
+
+        advertisement.tags.forEach(function (value) 
+        {
+          
+          if(tagindex == 0){this.tagstr_0 = value.tagText;}
+          if(tagindex == 1){this.tagstr_1 = value.tagText;}
+          if(tagindex == 2){this.tagstr_2 = value.tagText;}
+          if(tagindex == 3){this.tagstr_3 = value.tagText;}
+          if(tagindex == 4){this.tagstr_4 = value.tagText;}
+          if(tagindex == 5){this.tagstr_5 = value.tagText;}
+          if(tagindex == 6){this.tagstr_6 = value.tagText;}
+          if(tagindex == 7){this.tagstr_7 = value.tagText;}
+          if(tagindex == 8){this.tagstr_8 = value.tagText;}
+          if(tagindex == 9){this.tagstr_9 = value.tagText;}
+
+          tagindex++;
+        },this);
+
 
         this.advertisement = advertisement;
         console.log("Get title from API");

@@ -1,5 +1,14 @@
 <div class="form-login">
+       <style>
+              .colortext {
+                color: red; /* Красный цвет выделения */
+              }
+             </style>
+
   <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+  <div *ngIf="notloginedstatus">
+       <p><span class="colortext">Ошибка аутентификации!</span></p>
+     </div>
   <ng-container [formGroup]="loginForm">
     <label for="inputEmail"
            class="sr-only">Email</label>

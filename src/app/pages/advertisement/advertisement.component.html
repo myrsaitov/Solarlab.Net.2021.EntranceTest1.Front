@@ -6,6 +6,16 @@
         <div class="badge badge-secondary" *ngIf="advertisement.category?.name">{{advertisement.category?.name}}</div>
         <h4>  Добавлено пользователем:
         <div class="badge badge-secondary" *ngIf="advertisement?.email">{{advertisement.email}}</div></h4>
+        <div class="badge badge-secondary" *ngIf=tagstr_0>{{tagstr_0}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_1>{{tagstr_1}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_2>{{tagstr_2}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_3>{{tagstr_3}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_4>{{tagstr_4}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_5>{{tagstr_5}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_6>{{tagstr_6}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_7>{{tagstr_7}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_8>{{tagstr_8}}</div>&nbsp;&nbsp;
+        <div class="badge badge-secondary" *ngIf=tagstr_9>{{tagstr_9}}</div>&nbsp;&nbsp;
       </div>
       <div class="align-self-center ml-auto" *ngIf="isAuth">
         <a class="btn btn-outline-secondary mr-2" [routerLink]="['/edit', advertisement.id]" *ngIf="isEditable">Редактировать</a>

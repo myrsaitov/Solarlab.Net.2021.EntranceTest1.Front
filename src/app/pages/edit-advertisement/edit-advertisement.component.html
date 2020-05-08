@@ -5,23 +5,23 @@
       <ng-container [formGroup]="form">
         <div class="form-group">
           <label for="title">Название</label>
-          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Введите название">
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Введите название" autofocus [class.is-invalid]="title.invalid">
         </div>
         <div class="form-group">
           <label for="body">Описание</label>
-          <textarea class="form-control" id="body" formControlName="body" placeholder="Введите описание"></textarea>
+          <textarea class="form-control" id="body" formControlName="body" placeholder="Введите описание" autofocus [class.is-invalid]="body.invalid"></textarea>
         </div>
         <div class="form-group">
           <label for="categoryId">Категория</label>
-          <select class="form-control custom-select" id="categoryId" formControlName="categoryId"
+          <select class="form-control custom-select" id="categoryId" formControlName="categoryId" autofocus [class.is-invalid]="categoryId.invalid"
                   *ngIf="categories$ | async as categories">
             <option [value]="null">Выберите категорию</option>
             <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="body">Тэги</label>
-          <textarea class="form-control" id="body" formControlName="body" placeholder="Введите описание"></textarea>
+          <label for="tags">Введите тэги</label>
+          <input type="text" class="form-control" id="tags" formControlName="tags" placeholder="Введите тэги">
         </div>
         <button type="submit" class="btn btn-primary mr-2" [disabled]="form.invalid" (click)="submit()">Сохранить</button>
         <a [routerLink]="['/',advertisementId$ | async]" class="btn btn-outline-secondary">Отмена</a>

@@ -9,4 +9,7 @@ import {IAdvertisement} from '../../models/advertisement/i-advertisement';
 
 export class AdvertisementCardComponent {
   @Input() advertisement: IAdvertisement;
+
+
+
 }
