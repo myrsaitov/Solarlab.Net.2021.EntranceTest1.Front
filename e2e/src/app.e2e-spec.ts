@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('dashboard2020-spa app is running!');
+    expect(page.getTitleText()).toEqual('planner2020-spa app is running!');
   });
 
   afterEach(async () => {

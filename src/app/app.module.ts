@@ -5,7 +5,7 @@ import {SignupComponent} from './pages/signup/signup.component';
 import {LoginComponent} from './pages/login/login.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {HeaderComponent} from './components/header/header.component';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {DashboardComponent} from './pages/planner/planner.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, Provider} from '@angular/core';
 

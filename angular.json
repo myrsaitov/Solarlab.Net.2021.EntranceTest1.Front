@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dashboard2020-spa": {
+    "planner2020-spa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dashboard2020-spa",
+            "outputPath": "dist/planner2020-spa",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "dashboard2020-spa:build"
+            "browserTarget": "planner2020-spa:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dashboard2020-spa:build:production"
+              "browserTarget": "planner2020-spa:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dashboard2020-spa:build"
+            "browserTarget": "planner2020-spa:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dashboard2020-spa:serve"
+            "devServerTarget": "planner2020-spa:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "dashboard2020-spa:serve:production"
+              "devServerTarget": "planner2020-spa:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "dashboard2020-spa"
+  "defaultProject": "planner2020-spa"
 }

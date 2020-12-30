@@ -8,9 +8,9 @@ import {ICategory} from '../../models/category/category-model';
 import {switchMap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-planner',
+  templateUrl: './planner.component.html',
+  styleUrls: ['./planner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
