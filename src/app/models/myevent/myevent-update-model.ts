@@ -1,4 +1,4 @@
-export class AdvertisementUpdateModel {
+export class MyEventUpdateModel {
     /// <summary>
     /// Идентификатор
     /// </summary>

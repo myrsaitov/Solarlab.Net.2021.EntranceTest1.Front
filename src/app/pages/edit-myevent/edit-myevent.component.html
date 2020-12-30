@@ -24,7 +24,7 @@
           <input type="text" class="form-control" id="tags" formControlName="tags" placeholder="Введите тэги">
         </div>
         <button type="submit" class="btn btn-primary mr-2" [disabled]="form.invalid" (click)="submit()">Сохранить</button>
-        <a [routerLink]="['/',advertisementId$ | async]" class="btn btn-outline-secondary">Отмена</a>
+        <a [routerLink]="['/',myeventId$ | async]" class="btn btn-outline-secondary">Отмена</a>
       </ng-container>
     </div>
   </div>

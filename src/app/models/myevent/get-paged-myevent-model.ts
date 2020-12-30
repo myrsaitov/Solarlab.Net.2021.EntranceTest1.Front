@@ -1,4 +1,4 @@
-export class GetPagedAdvertisementModel {
+export class GetPagedMyEventModel {
     public categoryId?: number;
 
     public page: number;

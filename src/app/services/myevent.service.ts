@@ -2,21 +2,21 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {EMPTY, Observable} from 'rxjs';
-import {GetPagedAdvertisementModel} from '../models/advertisement/get-paged-advertisement-model';
-import {IAdvertisement} from '../models/advertisement/i-advertisement';
-import {ICreateAdvertisement} from '../models/advertisement/advertisement-create-model';
-import {IEditAdvertisement} from '../models/advertisement/advertisement-edit-model';
+import {GetPagedMyEventModel} from '../models/myevent/get-paged-myevent-model';
+import {IMyEvent} from '../models/myevent/i-myevent';
+import {ICreateMyEvent} from '../models/myevent/myevent-create-model';
+import {IEditMyEvent} from '../models/myevent/myevent-edit-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdvertisementService {
-  private ROOT_URL = `api/v1/abvertisement`;
+export class MyEventService {
+  private ROOT_URL = `api/v1/MyEvent`;
 
   constructor(private http: HttpClient) {
   }
 
-  getAdvertisementsList(model: GetPagedAdvertisementModel): Observable<IAdvertisement[]> {
+  getMyEventsList(model: GetPagedMyEventModel): Observable<IMyEvent[]> {
     const {page, pageSize} = model;
     if (page == null || pageSize == null) {
       return;
@@ -26,16 +26,31 @@ export class AdvertisementService {
       .set('page', `${page}`)
       .set('pageSize', `${pageSize}`);
 
-    return this.http.get<IAdvertisement[]>(`${this.ROOT_URL}/list`, {params})
+    return this.http.get<IMyEvent[]>(`${this.ROOT_URL}/list`, {params})
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;
       }));
   }
 
-  getAdvertisementById(id: number) {
+  getMyEventsTagList(id: number): Observable<IMyEvent[]> {
 
-    return this.http.get<IAdvertisement>(`${this.ROOT_URL}/${id}`)
+
+    const params = new HttpParams()
+      .set('page', `${1}`)
+      .set('pageSize', `${10}`)
+      .set('TagId', `${id}`)
+
+    return this.http.get<IMyEvent[]>(`${this.ROOT_URL}/taglist`, {params})
+      .pipe(catchError((err) => {
+        console.error(err);
+        return EMPTY;
+      }));
+  }
+
+  getMyEventById(id: number) {
+
+    return this.http.get<IMyEvent>(`${this.ROOT_URL}/${id}`)
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;
@@ -43,9 +58,9 @@ export class AdvertisementService {
       
   }
 
-  getAdvertisementGetAllTags() {
+  getMyEventGetAllTags() {
 
-    return this.http.get<IAdvertisement>(`${this.ROOT_URL}/GetAllTags`)
+    return this.http.get<IMyEvent>(`${this.ROOT_URL}/GetAllTags`)
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;
@@ -53,7 +68,7 @@ export class AdvertisementService {
       
   }
 
-  create(model: ICreateAdvertisement) {
+  create(model: ICreateMyEvent) {
     return this.http.post(`${this.ROOT_URL}`, model)
       .pipe(catchError((err) => {
         console.error(err);
@@ -61,7 +76,7 @@ export class AdvertisementService {
       }));
   }
 
-  edit(model: IEditAdvertisement) {
+  edit(model: IEditMyEvent) {
     return this.http.put(`${this.ROOT_URL}`, model)
       .pipe(catchError((err) => {
         console.error(err);
@@ -70,7 +85,7 @@ export class AdvertisementService {
   }
 
   delete(id: number) {
-    return this.http.delete<IAdvertisement>(`${this.ROOT_URL}/${id}`)
+    return this.http.delete<IMyEvent>(`${this.ROOT_URL}/${id}`)
       .pipe(catchError((err) => {
         console.error(err);
         return EMPTY;

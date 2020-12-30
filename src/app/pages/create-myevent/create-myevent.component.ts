@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AdvertisementService} from '../../services/advertisement.service';
-import {CreateAdvertisement, ICreateAdvertisement} from '../../models/advertisement/advertisement-create-model';
+import {MyEventService} from '../../services/myevent.service';
+import {CreateMyEvent, ICreateMyEvent} from '../../models/myevent/myevent-create-model';
 import {take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {ToastService} from '../../services/toast.service';
@@ -11,17 +11,17 @@ import {ICategory} from '../../models/category/category-model';
 import { TagModel } from 'src/app/models/tag/tag-model';
 
 @Component({
-  selector: 'app-create-advertisement',
-  templateUrl: './create-advertisement.component.html',
-  styleUrls: ['./create-advertisement.component.scss']
+  selector: 'app-create-myevent',
+  templateUrl: './create-myevent.component.html',
+  styleUrls: ['./create-myevent.component.scss']
 })
-export class CreateAdvertisementComponent implements OnInit {
+export class CreateMyEventComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<ICategory[]>;
   _tags: TagModel[]; ///MKM
 
   constructor(private fb: FormBuilder,
-              private advertisementService: AdvertisementService,
+              private myeventService: MyEventService,
               private categoryService: CategoryService,
               private router: Router,
               private toastService: ToastService) {
@@ -111,7 +111,7 @@ if(TagStr != null)
   //https://stackoverflow.com/questions/15013016/variable-is-not-accessible-in-angular-foreach
 }
 
-    const model: Partial<ICreateAdvertisement> = {
+    const model: Partial<ICreateMyEvent> = {
       title: this.title.value,
       body: this.body.value,
       tags: this._tags,
@@ -119,7 +119,7 @@ if(TagStr != null)
       categoryId: +this.categoryId.value
     };
 
-    this.advertisementService.create(new CreateAdvertisement(model)).pipe(take(1)).subscribe(() => {
+    this.myeventService.create(new CreateMyEvent(model)).pipe(take(1)).subscribe(() => {
       this.toastService.show('Объявление успешено добавлено', {classname: 'bg-success text-light'});
       this.router.navigate(['/']);
     });

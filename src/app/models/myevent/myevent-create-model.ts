@@ -1,7 +1,6 @@
 import {TagModel} from '../tag/tag-model';
 
-export interface IEditAdvertisement {
-  id: number;
+export interface ICreateMyEvent {
   title: string;
   body: string;
   email: string;
@@ -9,26 +8,23 @@ export interface IEditAdvertisement {
   tags: TagModel[];
 }
 
-export class EditAdvertisement implements IEditAdvertisement {
-  id: number;
+export class CreateMyEvent implements ICreateMyEvent {
   body: string;
   email: string;
   categoryId: number;
   tags: TagModel[];
   title: string;
 
-  constructor(data?: Partial<IEditAdvertisement>) {
-    const defaults: IEditAdvertisement = {
-      id: 0,
+  constructor(data?: Partial<ICreateMyEvent>) {
+    const defaults: ICreateMyEvent = {
       body: '',
-      email: '',
       categoryId: null,
       tags: [],
       title: '',
+      email: '',
       ...data
     };
 
-    this.id = defaults.id;
     this.body = defaults.body;
     this.categoryId = defaults.categoryId;
     this.tags = defaults.tags;

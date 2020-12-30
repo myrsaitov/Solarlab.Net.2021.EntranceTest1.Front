@@ -1,12 +1,12 @@
-import {AdvertisementComponent} from './pages/advertisement/advertisement.component';
+import {MyEventComponent} from './pages/myevent/myevent.component';
 import {SignupComponent} from './pages/signup/signup.component';
 import {LoginComponent} from './pages/login/login.component';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AuthGuard} from './guards/auth.guard';
-import {CreateAdvertisementComponent} from './pages/create-advertisement/create-advertisement.component';
-import {EditAdvertisementComponent} from './pages/edit-advertisement/edit-advertisement.component';
+import {CreateMyEventComponent} from './pages/create-myevent/create-myevent.component';
+import {EditMyEventComponent} from './pages/edit-myevent/edit-myevent.component';
 
 
 const routes: Routes = [
@@ -24,21 +24,21 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: CreateAdvertisementComponent,
+    component: CreateMyEventComponent,
     canActivate: [
       AuthGuard
     ]
   },
   {
     path: 'edit/:id',
-    component: EditAdvertisementComponent,
+    component: EditMyEventComponent,
     canActivate: [
       AuthGuard
     ]
   },
   {
     path: ':id',
-    component: AdvertisementComponent,
+    component: MyEventComponent,
   },
   {
     path: '**',

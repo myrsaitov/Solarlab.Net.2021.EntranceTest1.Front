@@ -1,6 +1,6 @@
 import {AuthService} from './services/auth.service';
-import {AdvertisementComponent} from './pages/advertisement/advertisement.component';
-import {AdvertisementCardComponent} from './components/advertisement-card/advertisement-card.component';
+import {MyEventComponent} from './pages/myevent/myevent.component';
+import {MyEventCardComponent} from './components/myevent-card/myevent-card.component';
 import {SignupComponent} from './pages/signup/signup.component';
 import {LoginComponent} from './pages/login/login.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -19,9 +19,9 @@ import {environment} from 'src/environments/environment';
 import {ApiInterceptor} from './interceptors/api-url.interceptor';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {AuthHeadersInterceptor} from './interceptors/headers.interceptor';
-import {CreateAdvertisementComponent} from './pages/create-advertisement/create-advertisement.component';
+import {CreateMyEventComponent} from './pages/create-myevent/create-myevent.component';
 import {ToastsContainerComponent} from './components/toast-container/toast-container.component';
-import {EditAdvertisementComponent} from './pages/edit-advertisement/edit-advertisement.component';
+import {EditMyEventComponent} from './pages/edit-myevent/edit-myevent.component';
 import { ConnectionpageComponent } from './components/connectionpage/connectionpage.component';
 
 // export const createInterceptorProvider = (interceptor: any): Provider => {
@@ -40,11 +40,11 @@ import { ConnectionpageComponent } from './components/connectionpage/connectionp
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    AdvertisementCardComponent,
-    AdvertisementComponent,
-    CreateAdvertisementComponent,
+    MyEventCardComponent,
+    MyEventComponent,
+    CreateMyEventComponent,
     ToastsContainerComponent,
-    EditAdvertisementComponent,
+    EditMyEventComponent,
     ConnectionpageComponent
   ],
   imports: [

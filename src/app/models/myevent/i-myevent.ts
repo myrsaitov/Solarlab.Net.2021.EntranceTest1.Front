@@ -1,6 +1,6 @@
 import {TagModel} from '../tag/tag-model';
 
-export interface IAdvertisement {
+export interface IMyEvent {
   id: number;
   title: string;
   body: string;

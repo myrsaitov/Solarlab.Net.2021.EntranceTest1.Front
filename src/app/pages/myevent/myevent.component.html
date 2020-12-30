@@ -1,24 +1,24 @@
-<div class="container" *ngIf="advertisement; else loadingBlock">
+<div class="container" *ngIf="myevent; else loadingBlock">
   <article class="card">
     <div class="card-header d-flex">
       <div>
-        <h1 class="h3">{{advertisement.title}}</h1>
-        <div class="badge badge-secondary" *ngIf="advertisement.category?.name">{{advertisement.category?.name}}</div>
+        <h1 class="h3">{{myevent.title}}</h1>
+        <div class="badge badge-secondary" *ngIf="myevent.category?.name">{{myevent.category?.name}}</div>
         <h4>  Добавлено пользователем:
-        <div class="badge badge-secondary" *ngIf="advertisement?.email">{{advertisement.email}}</div></h4>
+        <div class="badge badge-secondary" *ngIf="myevent?.email">{{myevent.email}}</div></h4>
 
         <div [innerHTML]="div_tag_div_str"></div>
         
       </div>
       <div class="align-self-center ml-auto" *ngIf="isAuth">
-        <a class="btn btn-outline-secondary mr-2" [routerLink]="['/edit', advertisement.id]" *ngIf="isEditable">Редактировать</a>
+        <a class="btn btn-outline-secondary mr-2" [routerLink]="['/edit', myevent.id]" *ngIf="isEditable">Редактировать</a>
         <button *ngIf="isEditable" class="btn btn-outline-danger" (click)="openDeleteModal(content)">Удалить</button>
       </div>
 
     </div>
     <div class="card-body">
       <p>
-        {{advertisement.body}}
+        {{myevent.body}}
       </p>
     </div>
   </article>
@@ -31,13 +31,13 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Вы дейстивтельно хотите удалить Объявление?</h4>
+    <h4 class="modal-title" id="modal-basic-title">Вы действительно хотите удалить Объявление?</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-link" (click)="c('Close Click')">Отмена</button>
-    <button type="button" class="btn btn-danger" (click)="delete(advertisement.id); c('Delete click')">Удалить</button>
+    <button type="button" class="btn btn-danger" (click)="delete(myevent.id); c('Delete click')">Удалить</button>
   </div>
 </ng-template>

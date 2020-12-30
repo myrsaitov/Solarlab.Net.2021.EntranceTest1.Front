@@ -2,8 +2,8 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {pluck, take} from 'rxjs/operators';
 import {isNullOrUndefined} from 'util';
-import {AdvertisementService} from '../../services/advertisement.service';
-import {IAdvertisement} from '../../models/advertisement/i-advertisement';
+import {MyEventService} from '../../services/myevent.service';
+import {IMyEvent} from '../../models/myevent/i-myevent';
 import {AuthService} from '../../services/auth.service';
 import {ToastService} from '../../services/toast.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -13,12 +13,12 @@ import {ICategory} from '../../models/category/category-model';//
 import { TagModel } from 'src/app/models/tag/tag-model';
 
 @Component({
-  templateUrl: './advertisement.component.html',
-  styleUrls: ['./advertisement.component.scss'],
+  templateUrl: './myevent.component.html',
+  styleUrls: ['./myevent.component.scss'],
 })
 
-export class AdvertisementComponent implements OnInit {
-  advertisement: IAdvertisement;
+export class MyEventComponent implements OnInit {
+  myevent: IMyEvent;
   tagstr_0: string;
   tagstr_1: string;
   tagstr_2: string;
@@ -35,7 +35,7 @@ export class AdvertisementComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private advertisementService: AdvertisementService,
+              private myeventService: MyEventService,
               private authService: AuthService,
               private toastService: ToastService,
               private categoryService: CategoryService,//
@@ -50,11 +50,11 @@ export class AdvertisementComponent implements OnInit {
 
 
 
-    this.route.params.pipe(pluck('id')).subscribe(advertisementId => {
+    this.route.params.pipe(pluck('id')).subscribe(myeventId => {
 
-      this.advertisementService.getAdvertisementById(advertisementId).subscribe(advertisement => {
+      this.myeventService.getMyEventById(myeventId).subscribe(myevent => {
         //debugger;
-        if (isNullOrUndefined(advertisement)) {
+        if (isNullOrUndefined(myevent)) {
           //debugger;
           this.router.navigate(['/']);
           return;
@@ -62,7 +62,7 @@ export class AdvertisementComponent implements OnInit {
 
       this.div_tag_div_str = '';
 
-        advertisement.tags.forEach(function (value) 
+        myevent.tags.forEach(function (value) 
         {
           
           this.div_tag_div_str += "<div class=\"badge badge-secondary\">" ;
@@ -74,15 +74,15 @@ export class AdvertisementComponent implements OnInit {
 
 
 
-        this.advertisement = advertisement;
+        this.myevent = myevent;
         console.log("Get title from API");
-        console.log(this.advertisement.title);
+        console.log(this.myevent.title);
 
         console.log("Get email from API");
-        console.log(this.advertisement.email);
+        console.log(this.myevent.email);
 
         // Запрет редактировать чужое объявление
-        if(this.advertisement.email == sessionStorage.getItem('currentUser'))
+        if(this.myevent.email == sessionStorage.getItem('currentUser'))
         {this.isEditable = true;}
           else
           {this.isEditable = false;}
@@ -90,13 +90,13 @@ export class AdvertisementComponent implements OnInit {
           console.log(this.isEditable);
 
 
-          this.categoryService.getCategoryById(this.advertisement.categoryId).subscribe(category => {
+          this.categoryService.getCategoryById(this.myevent.categoryId).subscribe(category => {
           if (isNullOrUndefined(category)) {
             this.router.navigate(['/']);
             return;
           }
 
-          this.advertisement.category = category;
+          this.myevent.category = category;
 
           });
 
@@ -109,7 +109,7 @@ export class AdvertisementComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.advertisementService.delete(id).pipe(take(1)).subscribe(() => {
+    this.myeventService.delete(id).pipe(take(1)).subscribe(() => {
       this.toastService.show('Объявление успешено удалено', {classname: 'bg-success text-light'});
       this.router.navigate(['/']);
     });

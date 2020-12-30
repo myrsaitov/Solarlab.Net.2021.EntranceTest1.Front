@@ -18,20 +18,20 @@
     </div>
   </div>
   <div class="row mb-2">
-    <ng-container *ngIf="advertisements$ | async as advertisements; else loadingBlock">
-      <app-advertisement-card
+    <ng-container *ngIf="myevents$ | async as myevents; else loadingBlock">
+      <app-myevent-card
         class="col-sm-4 mb-4"
-        *ngFor="let advertisement of advertisements"
-        [advertisement]="advertisement">
-      </app-advertisement-card>
+        *ngFor="let myevent of myevents"
+        [myevent]="myevent">
+      </app-myevent-card>
     </ng-container>
   </div>
   <div class="row">
     <div class="col-12">
       <ngb-pagination
-        [page]="advertisementsFilter.page"
-        (pageChange)="updateAdvertisementsFilterPage($event)"
-        [pageSize]="advertisementsFilter.pageSize"
+        [page]="myeventsFilter.page"
+        (pageChange)="updateMyEventsFilterPage($event)"
+        [pageSize]="myeventsFilter.pageSize"
         [collectionSize]="2"></ngb-pagination>
       
 
