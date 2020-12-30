@@ -120,7 +120,7 @@ if(TagStr != null)
     };
 
     this.myeventService.create(new CreateMyEvent(model)).pipe(take(1)).subscribe(() => {
-      this.toastService.show('Объявление успешено добавлено', {classname: 'bg-success text-light'});
+      this.toastService.show('Событие успешено добавлено', {classname: 'bg-success text-light'});
       this.router.navigate(['/']);
     });
   }

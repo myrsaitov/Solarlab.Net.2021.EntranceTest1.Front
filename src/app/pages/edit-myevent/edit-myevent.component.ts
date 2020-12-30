@@ -163,7 +163,7 @@ if(TagStr != null)
 
       return this.myeventService.edit(new EditMyEvent(model));
     }), take(1)).subscribe(() => {
-      this.toastService.show('Объявление успешено обновлено', {classname: 'bg-success text-light'});
+      this.toastService.show('Событие успешено обновлено', {classname: 'bg-success text-light'});
       this.router.navigate(['/']);
     });
   }

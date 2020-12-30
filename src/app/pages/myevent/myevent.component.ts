@@ -81,7 +81,7 @@ export class MyEventComponent implements OnInit {
         console.log("Get email from API");
         console.log(this.myevent.email);
 
-        // Запрет редактировать чужое объявление
+        // Запрет редактировать чужое событие
         if(this.myevent.email == sessionStorage.getItem('currentUser'))
         {this.isEditable = true;}
           else
@@ -110,7 +110,7 @@ export class MyEventComponent implements OnInit {
 
   delete(id: number) {
     this.myeventService.delete(id).pipe(take(1)).subscribe(() => {
-      this.toastService.show('Объявление успешено удалено', {classname: 'bg-success text-light'});
+      this.toastService.show('Событие успешено удалено', {classname: 'bg-success text-light'});
       this.router.navigate(['/']);
     });
   }
