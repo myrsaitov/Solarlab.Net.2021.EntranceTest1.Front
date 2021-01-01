@@ -42,7 +42,7 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       body: ['', Validators.required],
       tags: ['',Validators.required],
       categoryId: ['', Validators.required],
-      myDateTimeStr: ['', Validators.required]
+      myDateTimeStr: ['']
     });
     this.myeventId$.pipe(switchMap(myeventId => {
       return this.myeventService.getMyEventById(myeventId);
@@ -163,6 +163,7 @@ if(TagStr != null)
         body: this.body.value,
         tags: this._tags,
         email: sessionStorage.getItem('currentUser'),
+        myDateTimeStr: this.myDateTimeStr.value,
         categoryId: +this.categoryId.value
       };
 

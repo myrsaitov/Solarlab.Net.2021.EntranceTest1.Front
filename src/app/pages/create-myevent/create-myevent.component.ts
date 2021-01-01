@@ -34,6 +34,7 @@ export class CreateMyEventComponent implements OnInit {
       title: ['', Validators.required],
       body: ['', Validators.required],
       tags: [null],
+      myDateTimeStr: [''],
       categoryId: [null, Validators.required]
     });
     this.categories$ = this.categoryService.getCategoryList({
@@ -49,6 +50,10 @@ export class CreateMyEventComponent implements OnInit {
 
   get body() {
     return this.form.get('body');
+  }
+
+  get myDateTimeStr() {
+    return this.form.get('myDateTimeStr');
   }
 
   get categoryId() {
@@ -118,7 +123,7 @@ if(TagStr != null)
       title: this.title.value,
       body: this.body.value,
       tags: this._tags,
-     // myDateTime: this._myDateTime,
+      myDateTimeStr: this.myDateTimeStr.value,
       email: sessionStorage.getItem('currentUser'),
       categoryId: +this.categoryId.value
     };
