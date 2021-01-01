@@ -12,8 +12,8 @@
           <textarea class="form-control" id="body" formControlName="body" placeholder="Введите описание" autofocus [class.is-invalid]="body.invalid"></textarea>
         </div>
         <div class="form-group">
-          <label for="myDateTimeStr">Запланированные дата и время события</label>
-          <input type="text" class="form-control" id="myDateTimeStr" formControlName="myDateTimeStr" placeholder="10:10 10.01.2021" autofocus [class.is-invalid]="myDateTimeStr.invalid">
+          <label for="myDateTime">Запланированные дата и время события</label>
+          <input type="datetime-local" class="form-control" id="myDateTime" formControlName="myDateTime" placeholder="10:10 10.01.2021" autofocus [class.is-invalid]="myDateTime.invalid">
         </div>
         <div class="form-group">
           <label for="categoryId">Категория</label>

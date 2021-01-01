@@ -4,7 +4,7 @@ export interface IMyEvent {
   id: number;
   title: string;
   body: string;
-  myDateTimeStr: string;
+  myDateTime: string;
   email: string;
   category: any;
   categoryId: number;

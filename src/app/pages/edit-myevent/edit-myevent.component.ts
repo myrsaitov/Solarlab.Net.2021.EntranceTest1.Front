@@ -42,7 +42,7 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       body: ['', Validators.required],
       tags: ['',Validators.required],
       categoryId: ['', Validators.required],
-      myDateTimeStr: ['']
+      myDateTime: ['']
     });
     this.myeventId$.pipe(switchMap(myeventId => {
       return this.myeventService.getMyEventById(myeventId);
@@ -51,7 +51,7 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       this.title.patchValue(myevent.title);
       this.body.patchValue(myevent.body);
       this.categoryId.patchValue(myevent.categoryId);
-      this.myDateTimeStr.patchValue(myevent.myDateTimeStr);
+      this.myDateTime.patchValue(myevent.myDateTime);
       this.tagstr = "";
       myevent.tags.forEach(function (value) 
       {
@@ -83,8 +83,8 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
     return this.form.get('categoryId');
   }
 
-  get myDateTimeStr() {
-    return this.form.get('myDateTimeStr');
+  get myDateTime() {
+    return this.form.get('myDateTime');
   }
 
   get tags() {
@@ -163,7 +163,7 @@ if(TagStr != null)
         body: this.body.value,
         tags: this._tags,
         email: sessionStorage.getItem('currentUser'),
-        myDateTimeStr: this.myDateTimeStr.value,
+        myDateTime: this.myDateTime.value,
         categoryId: +this.categoryId.value
       };
 

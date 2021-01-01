@@ -7,7 +7,7 @@
         <h4>  Добавлено пользователем:
         <div class="badge badge-secondary" *ngIf="myevent?.email">{{myevent.email}}</div></h4>
         <h4>  Запланированные дата и время события:
-          <div class="badge badge-secondary" *ngIf="myevent?.myDateTimeStr">{{myevent.myDateTimeStr}}</div></h4>
+          <div class="badge badge-secondary" *ngIf="myevent?.myDateTime">{{myevent.myDateTime}}</div></h4>
 
         <div [innerHTML]="div_tag_div_str"></div>
         
