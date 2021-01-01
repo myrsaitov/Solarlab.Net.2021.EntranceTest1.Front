@@ -19,6 +19,8 @@ export class CreateMyEventComponent implements OnInit {
   form: FormGroup;
   categories$: Observable<ICategory[]>;
   _tags: TagModel[]; ///MKM
+  _myDateTime: string; ///MKM
+
 
   constructor(private fb: FormBuilder,
               private myeventService: MyEventService,
@@ -62,6 +64,7 @@ export class CreateMyEventComponent implements OnInit {
       return;
     }
 
+    this._myDateTime = "testtesttest";
 
 // Взяли строку с тагами с формы
 var TagStr = this.tags.value;
@@ -115,6 +118,7 @@ if(TagStr != null)
       title: this.title.value,
       body: this.body.value,
       tags: this._tags,
+     // myDateTime: this._myDateTime,
       email: sessionStorage.getItem('currentUser'),
       categoryId: +this.categoryId.value
     };

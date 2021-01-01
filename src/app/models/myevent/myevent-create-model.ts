@@ -3,6 +3,7 @@ import {TagModel} from '../tag/tag-model';
 export interface ICreateMyEvent {
   title: string;
   body: string;
+  myDateTimeStr: string;
   email: string;
   categoryId: number;
   tags: TagModel[];
@@ -10,6 +11,7 @@ export interface ICreateMyEvent {
 
 export class CreateMyEvent implements ICreateMyEvent {
   body: string;
+  myDateTimeStr: string;
   email: string;
   categoryId: number;
   tags: TagModel[];
@@ -21,6 +23,7 @@ export class CreateMyEvent implements ICreateMyEvent {
       categoryId: null,
       tags: [],
       title: '',
+      myDateTimeStr: '',
       email: '',
       ...data
     };
@@ -29,6 +32,7 @@ export class CreateMyEvent implements ICreateMyEvent {
     this.categoryId = defaults.categoryId;
     this.tags = defaults.tags;
     this.title = defaults.title;
+    this.myDateTimeStr = defaults.myDateTimeStr;
     this.email = defaults.email;
   }
 }

@@ -41,7 +41,8 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       title: ['', Validators.required],
       body: ['', Validators.required],
       tags: ['',Validators.required],
-      categoryId: ['', Validators.required]
+      categoryId: ['', Validators.required],
+      myDateTimeStr: ['', Validators.required]
     });
     this.myeventId$.pipe(switchMap(myeventId => {
       return this.myeventService.getMyEventById(myeventId);
@@ -50,7 +51,7 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       this.title.patchValue(myevent.title);
       this.body.patchValue(myevent.body);
       this.categoryId.patchValue(myevent.categoryId);
-
+      this.myDateTimeStr.patchValue(myevent.myDateTimeStr);
       this.tagstr = "";
       myevent.tags.forEach(function (value) 
       {
@@ -80,6 +81,10 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
 
   get categoryId() {
     return this.form.get('categoryId');
+  }
+
+  get myDateTimeStr() {
+    return this.form.get('myDateTimeStr');
   }
 
   get tags() {
