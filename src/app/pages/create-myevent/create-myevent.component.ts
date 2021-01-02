@@ -34,7 +34,7 @@ export class CreateMyEventComponent implements OnInit {
       title: ['', Validators.required],
       body: ['', Validators.required],
       tags: [null],
-      myDateTime: [''],
+      myDateTime: ['', Validators.required],
       categoryId: [null, Validators.required]
     });
     this.categories$ = this.categoryService.getCategoryList({

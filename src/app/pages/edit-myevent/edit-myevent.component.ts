@@ -42,7 +42,7 @@ export class EditMyEventComponent implements OnInit, OnDestroy {
       body: ['', Validators.required],
       tags: ['',Validators.required],
       categoryId: ['', Validators.required],
-      myDateTime: ['']
+      myDateTime: ['', Validators.required]
     });
     this.myeventId$.pipe(switchMap(myeventId => {
       return this.myeventService.getMyEventById(myeventId);
